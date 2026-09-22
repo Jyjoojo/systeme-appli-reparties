@@ -3,7 +3,7 @@ package edu.polytech.channels.empty;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class RDV {
+class RDV {
 
     private boolean accepting = false;
     private final Queue<PendingConnect> connects = new LinkedList<>();

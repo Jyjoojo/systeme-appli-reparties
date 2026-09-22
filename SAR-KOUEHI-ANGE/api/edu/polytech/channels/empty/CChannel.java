@@ -14,7 +14,6 @@ public class CChannel implements Channel {
 
     private CChannel peer;
     
-
     protected CChannel(CBroker broker, int port) {
     	in = new CircularBuffer(CAPACITY);
         out = new CircularBuffer(CAPACITY);
@@ -103,23 +102,23 @@ public class CChannel implements Channel {
 
     @Override
     public void disconnect() {
-    	 if (localDisconnected)
-             return;
+    	if (localDisconnected)
+            return;
 
-         localDisconnected = true;
+        localDisconnected = true;
 
-         synchronized (out) {
-             out.notifyAll();
-         }
+        synchronized (out) {
+            out.notifyAll();
+        }
 
-         if (peer != null) {
+        if (peer != null) {
 
-             peer.remoteDisconnected = true;
+            peer.remoteDisconnected = true;
 
-             synchronized (peer.in) {
-                 peer.in.notifyAll();
-             }
-         }
+            synchronized (peer.in) {
+                peer.in.notifyAll();
+            }
+        }
     }
 
 }
